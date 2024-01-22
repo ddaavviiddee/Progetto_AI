@@ -3,6 +3,7 @@ import numpy as np
 from neural_network import create_cnn, train_cnn
 from copy import deepcopy
 import csv
+import time
 
 
 # Funzione di fitness
@@ -63,13 +64,15 @@ def save_individuals(filename, best_individual, best_accuracy):
 
 # Esempio di utilizzo dell'algoritmo genetico
 population_size = 10
-generations = 6
+generations = 10
 population = initialize_population(population_size)
 
 # Esempio di utilizzo delle funzioni di salvataggio e caricamento
 population_filename = 'population.csv'
 best_individual = None
 best_accuracy = 0.0
+
+start_time = time.time()
 
 # All'interno del ciclo delle generazioni
 for generation in range(generations):
@@ -96,3 +99,6 @@ for generation in range(generations):
         new_population.extend([child1, child2])
 
     population = new_population
+
+print(time.time() - start_time)
+
