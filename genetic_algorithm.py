@@ -9,9 +9,10 @@ import time
 # Funzione di fitness
 def fitness(individual):
     # Addestra la CNN con i parametri dell'individuo e restituisci l'accuracy
+    print("Training with individual")
     num_conv_layers, conv_size, num_fc_layers, fc_size = individual
     cnn_model = create_cnn(num_conv_layers, conv_size, num_fc_layers, fc_size)
-    accuracy = train_cnn(cnn_model, epochs=5)
+    accuracy = train_cnn(cnn_model, epochs=10)
     return accuracy
 
 # Inizializzazione della popolazione
@@ -22,7 +23,7 @@ def initialize_population(population_size):
             random.randint(1, 5),  # Numero di strati convoluzionali
             random.randint(16, 64),  # Dimensione degli strati convoluzionali
             random.randint(1, 3),  # Numero di strati fully-connected
-            random.randint(32, 256)  # Dimensione degli strati fully-connected
+            random.randint(16, 256)  # Dimensione degli strati fully-connected
         ]
         population.append(individual)
     return population
@@ -63,7 +64,7 @@ def save_individuals(filename, best_individual, best_accuracy):
         
 
 # Esempio di utilizzo dell'algoritmo genetico
-population_size = 10
+population_size = 20
 generations = 10
 population = initialize_population(population_size)
 

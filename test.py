@@ -1,2 +1,3 @@
-import tensorflow as tf
-print("GPU disponibile:" , tf.config.list_physical_devices('GPU'))
+from numba import cuda
+device = cuda.get_current_device()
+device.reset()
