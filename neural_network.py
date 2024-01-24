@@ -22,8 +22,8 @@ def create_cnn(num_conv_layers, conv_size, num_fc_layers, fc_size):
 
     
     model.add(layers.Flatten())
-    model.add(Dropout(0.3))
-    
+    model.add(Dropout(0.5))
+
     # Aggiunta degli strati fully-connected
     for _ in range(num_fc_layers):
         model.add(layers.Dense(fc_size, activation='relu'))
