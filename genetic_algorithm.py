@@ -21,7 +21,7 @@ def initialize_population(population_size):
     for _ in range(population_size):
         individual = [
             random.randint(1, 5),  # Numero di strati convoluzionali
-            random.randint(16, 64),  # Dimensione degli strati convoluzionali
+            random.randint(16, 256),  # Dimensione degli strati convoluzionali
             random.randint(1, 3),  # Numero di strati fully-connected
             random.randint(16, 256)  # Dimensione degli strati fully-connected
         ]
@@ -102,4 +102,3 @@ for generation in range(generations):
     population = new_population
 
 print(time.time() - start_time)
-

@@ -47,4 +47,3 @@ def train_cnn(model, epochs):
 
 
 
-
