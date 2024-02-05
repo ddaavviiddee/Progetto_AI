@@ -31,23 +31,25 @@ def initialize_population(population_size):
 # Selezione dei genitori basata sulla roulette wheel
 def select_parents(population, fitness_values):
     total_fitness = sum(fitness_values)
-    probabilities = [fit / total_fitness for fit in fitness_values]
-    selected_indices = np.random.choice(len(population), size=2, p=probabilities)
-    return [population[i] for i in selected_indices]
+    probabilities = [fit / total_fitness for fit in fitness_values] # Calcolo delle probabilità per ogni individuo
+    selected_indices = np.random.choice(len(population), size=2, p=probabilities) # Scelta di due indici in base alla probabilità
+    return [population[i] for i in selected_indices] # Estrazione degli individui
 
 # Crossover a un punto
 def crossover(parent1, parent2):
-    crossover_point = random.randint(0, len(parent1) - 1)
+    crossover_point = random.randint(0, len(parent1) - 1) # Crossover a un punto casuale
     child1 = parent1[:crossover_point] + parent2[crossover_point:]
     child2 = parent2[:crossover_point] + parent1[crossover_point:]
     return child1, child2
 
 # Mutazione
 def mutate(individual, mutation_rate=0.1):
-    mutated_individual = deepcopy(individual)
-    for i in range(len(mutated_individual)):
-        if random.random() < mutation_rate:
-            mutated_individual[i] = random.randint(1, 5) if i % 2 == 0 else random.randint(16, 256)
+    mutated_individual = deepcopy(individual) # Deepcopy assicura che sia una copia separata dall'originale 
+    for i in range(len(mutated_individual)): # Cicla gene per gene
+        if random.random() < mutation_rate: # Mutation rate del 10%
+            mutated_individual[i] = random.randint(1, 5) if i % 2 == 0 else random.randint(16, 256) # Mutazione dell'individuo
+            # Se l'indice è pari allora il gene corrisponde al numero di strati convoluzionali
+            # Altrimenti corrisponde alla dimensione dello strato
     return mutated_individual
 
 # Funzione per salvare la popolazione in un file CSV
@@ -83,8 +85,8 @@ for generation in range(generations):
     best_index = np.argmax(fitness_values) if fitness_values else None
 
     if best_index is not None:
-        best_individual = population[best_index]
-        best_accuracy = fitness_values[best_index]
+        best_individual = population[best_index] # Selezione del miglior individuo
+        best_accuracy = fitness_values[best_index] # Selezione della miglior accuracy associata all'individuo
         save_individuals(population_filename, best_individual, best_accuracy)
         print(f'Generazione {generation + 1}: Miglior Accuracy = {best_accuracy}, Parametri = {best_individual}')
     else:

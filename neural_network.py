@@ -1,4 +1,3 @@
-import tensorflow as tf
 from keras import layers, models
 from keras.layers import Dropout
 from keras.datasets import cifar10
@@ -22,13 +21,13 @@ def create_cnn(num_conv_layers, conv_size, num_fc_layers, fc_size):
 
     
     model.add(layers.Flatten())
-    model.add(Dropout(0.5))
+    model.add(Dropout(0.5)) # Dropout per limitare l'overfitting
 
     # Aggiunta degli strati fully-connected
     for _ in range(num_fc_layers):
         model.add(layers.Dense(fc_size, activation='relu'))
 
-    model.add(Dropout(0.3))
+    model.add(Dropout(0.3)) # Dropout per limitare l'overfitting
     model.add(layers.Dense(10, activation='softmax'))  # Strato di output
 
     return model
